@@ -7,6 +7,17 @@ from typing import List
 
 def filter_datum(fields: List[str], redaction: str,
                  message: str, separator: str) -> str:
+    """_summary_
+
+    Args:
+        fields (List[str]): _description_
+        redaction (str): _description_
+        message (str): _description_
+        separator (str): _description_
+
+    Returns:
+        str: _description_
+    """
     pattern = re.compile('|'.join(
         [f"(?P<{field}>{field}=[^{separator}]*)" for field in fields]))
     return pattern.sub(
@@ -31,3 +42,7 @@ class RedactingFormatter(logging.Formatter):
                              f"{field}={self.REDACTION}{self.SEPARATOR}",
                              message)
         return message
+
+
+if __name__ == "__main__":
+    main()
